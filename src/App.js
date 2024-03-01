@@ -1,20 +1,20 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./src/Header";
-import Body from "./src/Body";
+import Header from "./components/Header";
+import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./src/About";
-import Contact from "./src/Contact";
-import Error from "./src/Error";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Error from "./components/Error";
 
-import RestaurantMenu from "./src/RestaurantMenu";
-import Shimmer from "./src/Shimmer";
+import RestaurantMenu from "./components/RestaurantMenu";
+import Shimmer from "./components/Shimmer";
 // import Grocery from "./src/Grocery";
 
-const Grocery = lazy(() => import("./src/Grocery"));
+const Grocery = lazy(() => import("./components/Grocery"));
 const AppLayout = () => {
   return (
-    <div className="app">
+    <div className="overflow-x-hidden overflow-y-hidden">
       <Header />
 
       <Outlet />

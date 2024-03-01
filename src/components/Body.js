@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -10,6 +10,9 @@ const Body = () => {
   const [data, setData] = useState([]);
   const [searchedText, setSearchedText] = useState("");
   const onlineStatus = useOnlineStatus();
+  // console.log(res);
+
+  const RestaurantPromotedCard = withPromotedLabel(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -55,24 +58,36 @@ const Body = () => {
   }
 
   return (
-    <div className="body">
-      <div className="filter">
+    <div className="">
+      <div className="flex m-4 p-4 items-center">
         <input
           type="text"
-          className="search-box"
+          className=" border border-solid border-black h-8"
           value={searchedText}
           onChange={searchChangeHandler}
         ></input>
-        <button onClick={searchClickHandler}>Search</button>
+        <button
+          className="px-4 py-1 bg-blue-200 m-4 rounded-lg"
+          onClick={searchClickHandler}
+        >
+          Search
+        </button>
 
-        <button className="filter-btn" onClick={filterClickHandler}>
+        <button
+          className="px-6 py-2 bg-blue-200 m-4 rounded-lg"
+          onClick={filterClickHandler}
+        >
           Top rated Restaurant
         </button>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap mx-auto my-0 w-[95%]">
         {data.map((dat) => (
           <Link key={dat.info.id} to={"/restaurants/" + dat.info.id}>
-            <RestaurantCard dat={dat} />
+            {dat.info.promoted ? (
+              <RestaurantPromotedCard dat={dat} />
+            ) : (
+              <RestaurantCard dat={dat} />
+            )}
           </Link>
         ))}
       </div>
